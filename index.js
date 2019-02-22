@@ -3,6 +3,9 @@ const {
   convertNodeHttpToRequest,
   runHttpQuery
 } = require('apollo-server-core')
+const {
+  renderPlaygroundPage
+} = require('@apollographql/graphql-playground-html')
 
 const basicGraphqlServer = (config, dependencies) =>
   graphqlServer(new ApolloServerBase(config), dependencies)
@@ -55,7 +58,26 @@ const graphqlServer = (apollo, dependencies = {}) => {
   }
 }
 
+const playground = (options = {}, dependencies = {}) => {
+  const {
+    getEndpoint = () => options.endpoint,
+    renderPage = renderPlaygroundPage
+  } = dependencies
+
+  return async (ctx, next) => {
+    ctx.set('Content-Type', 'text/html')
+
+    ctx.body = renderPage({
+      endpoint: getEndpoint(ctx),
+      ...options
+    })
+
+    return next()
+  }
+}
+
 module.exports = {
   basicGraphqlServer,
-  graphqlServer
+  graphqlServer,
+  playground
 }

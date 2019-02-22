@@ -1,0 +1,8 @@
+node_modules
+.serverless
+.webpack
+.idea
+.npm
+*.log
+config/local-*
+*.bak

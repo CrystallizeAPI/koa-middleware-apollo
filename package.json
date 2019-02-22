@@ -1,0 +1,39 @@
+{
+  "name": "@crystallize/koa-middleware-apollo",
+  "version": "0.0.1",
+  "description": "Apollo server implementation that uses the traditional koa middleware pattern",
+  "main": "index.js",
+  "author": "Michael Smesnik <michael@snowball.digital>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "standard \"**/*.mjs\"",
+    "format": "prettier-standard \"lib/**/*.mjs\" \"test/**/*.mjs\"",
+    "test": "NODE_ENV=test mocka test/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect"
+    ]
+  },
+  "devDependencies": {
+    "@tailored-apps/helpers": "^1.1.1",
+    "chai": "^4.2.0",
+    "husky": "^1.2.0",
+    "mocha": "^6.0.0",
+    "prettier-standard": "^9.1.1",
+    "sinon": "^7.2.4",
+    "standard": "^12.0.1"
+  },
+  "dependencies": {
+    "@apollographql/graphql-playground-html": "^1.6.6",
+    "apollo-server-core": "^2.4.6",
+    "graphql": "^14.1.1"
+  }
+}

@@ -6,8 +6,8 @@
   "author": "Michael Smesnik <michael@snowball.digital>",
   "license": "MIT",
   "scripts": {
-    "lint": "standard \"**/*.mjs\"",
-    "format": "prettier-standard \"lib/**/*.mjs\" \"test/**/*.mjs\"",
+    "lint": "standard",
+    "format": "prettier-standard \"index.js\" \"test/*.js\"",
     "test": "NODE_ENV=test mocka test/*.js"
   },
   "husky": {

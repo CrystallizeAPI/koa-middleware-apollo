@@ -1,6 +1,6 @@
 {
   "name": "@crystallize/koa-middleware-apollo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Apollo server implementation that uses the traditional koa middleware pattern",
   "repository": {
     "type": "git",

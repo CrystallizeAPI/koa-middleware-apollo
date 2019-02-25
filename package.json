@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/CrystallizeAPI/koa-middleware-apollo.git"
   },
+  "keywords": ["graphql", "koa", "middleware", "crystallize"],
   "main": "index.js",
   "author": "Michael Smesnik <michael@snowball.digital>",
   "license": "MIT",

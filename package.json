@@ -19,7 +19,7 @@
     "preversion": "npm run lint && npm run test",
     "lint": "standard",
     "format": "prettier-standard \"index.js\" \"test/*.js\"",
-    "test": "NODE_ENV=test mocka test/*.js"
+    "test": "NODE_ENV=test mocha test/*.js"
   },
   "husky": {
     "hooks": {

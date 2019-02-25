@@ -99,7 +99,7 @@ This is a close to real life example implementation of a basic graphql server at
  ```
 
 # Author
-[Michael Smesnik](https://github.com/daerion)
+[Michael Smesnik](https://github.com/daerion) at [crystallize](https://crystallize.com)
 
 # License
 MIT

@@ -2,15 +2,15 @@
 
 Apollo server implementation that uses the traditional koa middleware pattern. Heavily inspired by [apollo-server-koa](https://github.com/apollographql/apollo-server/tree/master/packages/apollo-server-koa).
 
-_This package is a work in progress and currently does not support file uploads or graphql subscriptions._
+_This package is a work in progress and currently does not support file uploads or GraphQL subscriptions._
 
 ## Motivation
-While the official implementation of the Apollo GraphQL server for koa, the [apollo-server-koa](https://github.com/apollographql/apollo-server/tree/master/packages/apollo-server-koa) package mentioned above, provides an easy way to get a graphql server up and running, it does not work the same way that other koa middleware does. Rather than adding a middleware function to the koa stack (via `app.use()`), `apollo-server-koa` exposes an `applyMiddleware` function on an instance of the `ApolloServer` class (see package documentation for further details). This can be problematic if you, for instance, want to use path parameters for your graphql endpoint (e.g. `/graph/:clientId`).
+While the official implementation of the Apollo GraphQL server for koa, the [apollo-server-koa](https://github.com/apollographql/apollo-server/tree/master/packages/apollo-server-koa) package mentioned above, provides an easy way to get a GraphQL server up and running, it does not work the same way that other koa middleware does. Rather than adding a middleware function to the koa stack (via `app.use()`), `apollo-server-koa` exposes an `applyMiddleware` function on an instance of the `ApolloServer` class (see package documentation for further details). This can be problematic if you, for instance, want to use path parameters for your GraphQL endpoint (e.g. `/graph/:clientId`).
 
 `@crystallize/koa-middleware-apollo` exports middleware functions that integrate seamlessly into any koa middleware stack, thus providing better interoperability and allowing for greater customizability.   
 
 ### Batteries not Included
-Since our aim is to integrate as seamlessly as possible into any middleware stack, we make as few assumptions as reasonably possible. Therefore, `@crystallize/koa-middleware-apollo` does not include a bodyparser, a router or anything other than the basic tools to run a graphql server. Contrary to `apollo-server-koa`, it also does not export [graphql-tools](https://github.com/apollographql/graphql-tools) or [apollo-server-core](https://www.npmjs.com/package/apollo-server-core), which means you will have to add that to your dependencies manually if you intend to use functionality provided by these packages (e.g. `makeExecutableSchema` or `gql` respectively).  
+Since our aim is to integrate as seamlessly as possible into any middleware stack, we make as few assumptions as reasonably possible. Therefore, `@crystallize/koa-middleware-apollo` does not include a bodyparser, a router or anything other than the basic tools to run a GraphQL server. Contrary to `apollo-server-koa`, it also does not export [graphql-tools](https://github.com/apollographql/graphql-tools) or [apollo-server-core](https://www.npmjs.com/package/apollo-server-core), which means you will have to add that to your dependencies manually if you intend to use functionality provided by these packages (e.g. `makeExecutableSchema` or `gql` respectively).  
 
 ## Installation
 ```
@@ -19,7 +19,7 @@ yarn add @crystallize/koa-middleware-apollo
 
 ## Basic GraphQL Server
 ### `basicGraphqlServer(options[, dependencies]) -> Function`
-Returns middleware for a basic graphql server (implemented using `ApolloServerBase` from the [apollo-server-core](https://www.npmjs.com/package/apollo-server-core) package).
+Returns middleware for a basic GraphQL server (implemented using `ApolloServerBase` from the [apollo-server-core](https://www.npmjs.com/package/apollo-server-core) package).
 
 * `options`: Configuration object that will be passed to the `ApolloServerBase` constructor
 * `dependencies` (optional): Allows for deeper customization of middleware behavior using dependency injection for various functions (default implementations shown here):
@@ -50,21 +50,21 @@ app.use(middleware)
 ```
 
 ### `graphqlServer(apollo[, dependencies]) -> Function`
-Returns middleware for a custom graphql server instance.
+Returns middleware for a custom GraphQL server instance.
 
 * `apollo`: Instance of an `ApolloServer` class
 * `dependencies` (optional): See above
 
-## Graphql Playground
+## GraphQL Playground
 ### `graphqlPlayground(options[, dependencies]) -> Function`
 Returns middleware for rendering a [GraphQL playground](https://www.apollographql.com/docs/apollo-server/features/graphql-playground.html) via the [@apollographql/graphql-playground-html](https://www.npmjs.com/package/@apollographql/graphql-playground-html) package.
 
 * `options`: Configuration object that will be passed directly to the playground render function. See [docs](https://github.com/prisma/graphql-playground#usage) for available options
 * `dependencies` (optional):
-  * `getEndpoint`: Returns the graphql server endpoint. Will receive koa `ctx` as its only parameter. Defaults to `options.endpoint`.
+  * `getEndpoint`: Returns the GraphQL server endpoint. Will receive koa `ctx` as its only parameter. Defaults to `options.endpoint`.
   
 # Full Example
-This is a close to real life example implementation of a basic graphql server at an endpoint that makes use of a path parameter.
+This is a close to real life example implementation of a basic GraphQL server at an endpoint that makes use of a path parameter.
 
  ```js
  const Koa = require('koa')

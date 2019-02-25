@@ -56,7 +56,7 @@ Returns middleware for a custom GraphQL server instance.
 * `dependencies` (optional): See above
 
 ## GraphQL Playground
-### `graphqlPlayground(options[, dependencies]) -> Function`
+### `playground(options[, dependencies]) -> Function`
 Returns middleware for rendering a [GraphQL playground](https://www.apollographql.com/docs/apollo-server/features/graphql-playground.html) via the [@apollographql/graphql-playground-html](https://www.npmjs.com/package/@apollographql/graphql-playground-html) package.
 
 * `options`: Configuration object that will be passed directly to the playground render function. See [docs](https://github.com/prisma/graphql-playground#usage) for available options
@@ -69,7 +69,8 @@ This is a close to real life example implementation of a basic GraphQL server at
  ```js
  const Koa = require('koa')
  const Router = require('koa-router')
- const { basicGraphqlServer, graphqlPlayground } = require('@crystallize/koa-middleware-apollo')
+ const bodyParser = require('koa-bodyparser')
+ const { basicGraphqlServer, playground } = require('@crystallize/koa-middleware-apollo')
  
  const schema = require('./schema')
  
@@ -84,7 +85,7 @@ This is a close to real life example implementation of a basic GraphQL server at
    }
  }))
  
- router.get('/graph/:clientId', graphqlPlayground({
+ router.get('/graph/:clientId', playground({
    'editor.theme': 'light'
  }, {
    getEndpoint: ctx => `/graph/${ctx.params.clientId}`
@@ -93,6 +94,7 @@ This is a close to real life example implementation of a basic GraphQL server at
  const app = new Koa()
  
  app
+   .use(bodyParser())
    .use(router.routes())
  
  app.listen(process.env.PORT || 3000)

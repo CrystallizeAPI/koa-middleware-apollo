@@ -1,4 +1,5 @@
 # koa-middleware-apollo
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Apollo server implementation that uses the traditional koa middleware pattern. Heavily inspired by [apollo-server-koa](https://github.com/apollographql/apollo-server/tree/master/packages/apollo-server-koa).
 
@@ -67,38 +68,53 @@ Returns middleware for rendering a [GraphQL playground](https://www.apollographq
 This is a close to real life example implementation of a basic GraphQL server at an endpoint that makes use of a path parameter.
 
  ```js
- const Koa = require('koa')
- const Router = require('koa-router')
- const bodyParser = require('koa-bodyparser')
- const { basicGraphqlServer, playground } = require('@crystallize/koa-middleware-apollo')
- 
- const schema = require('./schema')
- 
- const router = new Router()
- 
- router.post('/graph/:clientId', basicGraphqlServer({
-   schema,
-   context: ({ ctx }) => {
-     const { clientId } = ctx.params
-     
-     return { clientId }
-   }
- }))
- 
- router.get('/graph/:clientId', playground({
-   'editor.theme': 'light'
- }, {
-   getEndpoint: ctx => `/graph/${ctx.params.clientId}`
- }))
- 
- const app = new Koa()
- 
- app
-   .use(bodyParser())
-   .use(router.routes())
- 
- app.listen(process.env.PORT || 3000)
- ```
+const Koa = require('koa')
+const Router = require('koa-router')
+const bodyParser = require('koa-bodyparser')
+const {
+  basicGraphqlServer,
+  playground
+} = require('@crystallize/koa-middleware-apollo')
+
+const schema = require('./schema')
+
+const router = new Router()
+
+router.post(
+  '/graph/:clientId',
+  basicGraphqlServer({
+    schema,
+    context: ({ ctx }) => {
+      const { clientId } = ctx.params
+
+      return { clientId }
+    }
+  })
+)
+
+router.get(
+  '/graph/:clientId',
+  playground(
+    {
+      settings: {
+        'editor.theme': 'light'
+      }
+    },
+    {
+      getEndpoint: ctx => `/graph/${ctx.params.clientId}`
+    }
+  )
+)
+
+const app = new Koa()
+
+app
+  .use(bodyParser())
+  .use(router.routes())
+
+app.listen(process.env.PORT || 3000)
+
+```
 
 # Author
 [Michael Smesnik](https://github.com/daerion) at [crystallize](https://crystallize.com)

@@ -3,9 +3,7 @@ const {
   convertNodeHttpToRequest,
   runHttpQuery
 } = require('apollo-server-core')
-const {
-  renderPlaygroundPage
-} = require('@apollographql/graphql-playground-html')
+const { renderPlaygroundPage } = require('graphql-playground-html')
 
 const basicGraphqlServer = (config, dependencies) =>
   graphqlServer(new ApolloServerBase(config), dependencies)
